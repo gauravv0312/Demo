@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "884659916925",
+    "project_id": "gaurav-49757",
+    "storage_bucket": "gaurav-49757.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884659916925:android:a28d93bd35335a217fa114",
+        "android_client_info": {
+          "package_name": "com.example.gaurav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884659916925-e0nr6t54pl8gggt2ubg4ag0krtkif1fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsVAx97mvK-SswVhRARt3e3XSuEUegT7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884659916925-e0nr6t54pl8gggt2ubg4ag0krtkif1fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
