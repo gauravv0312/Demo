@@ -42,9 +42,9 @@ public class PostActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==2000)
+        if (requestCode == 2000)
         {
-            if (requestCode==Activity.RESULT_OK)
+            if (resultCode == Activity.RESULT_OK)
             {
                 Uri imageuri=data.getData();
                 imageView.setImageURI(imageuri);
