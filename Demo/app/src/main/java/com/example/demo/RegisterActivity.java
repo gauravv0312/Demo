@@ -25,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
     EditText name,email,phone,password,cpassword;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+    private String Email;
+    private  String Password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,20 +76,25 @@ public class RegisterActivity extends AppCompatActivity {
 
 //                Toast.makeText(RegisterActivity.this, "Welcome to registeration page", Toast.LENGTH_SHORT).show();
 
-                fAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
-                            Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),ContactActivity.class));
-                        }
-                        else {
-                            Toast.makeText(RegisterActivity.this, "Error!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                  Signup();
                 
+            }
+        });
+    }
+
+     public void Signup() {
+        fAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful())
+                {
+                    Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),ContactActivity.class));
+                }
+                else
+                {
+                    Toast.makeText(RegisterActivity.this, "Error!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
