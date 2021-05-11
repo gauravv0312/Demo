@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-     public void Signup() {
+     private void Signup() {
         fAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
