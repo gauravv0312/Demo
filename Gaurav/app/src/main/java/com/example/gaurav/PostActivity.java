@@ -1,5 +1,6 @@
 package com.example.gaurav;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,9 +12,15 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.net.URI;
 
@@ -22,6 +29,7 @@ public class PostActivity extends AppCompatActivity {
     Button setprofile;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,7 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
         imageView=findViewById(R.id.imageView);
         setprofile=findViewById(R.id.setprofile);
+        storageReference= FirebaseStorage.getInstance().getReference();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,12 +51,26 @@ public class PostActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2000)
+        if (requestCode==2000)
         {
-            if (resultCode == Activity.RESULT_OK)
+            if (resultCode==Activity.RESULT_OK)
             {
                 Uri imageuri=data.getData();
                 imageView.setImageURI(imageuri);
+//                upload image to firebase storage
+                 StorageReference fileRef= storageReference.child("profile"); //.child(fAuth.getuid)
+                 fileRef.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                     @Override
+                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                         Toast.makeText(PostActivity.this, "Image upload", Toast.LENGTH_SHORT).show();
+                     }
+                 }).addOnFailureListener(new OnFailureListener() {
+                     @Override
+                     public void onFailure(@NonNull Exception e) {
+                         Toast.makeText(PostActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                     }
+                 });
+
             }
         }
     }
